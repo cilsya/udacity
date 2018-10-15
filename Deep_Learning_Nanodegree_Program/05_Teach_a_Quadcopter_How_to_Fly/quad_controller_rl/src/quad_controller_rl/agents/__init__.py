@@ -1,0 +1,6 @@
+from quad_controller_rl.agents.base_agent import BaseAgent
+from quad_controller_rl.agents.policy_search import RandomPolicySearch
+from quad_controller_rl.agents.task01_ddpg_agent import Task01_DDPG
+from quad_controller_rl.agents.task02_ddpg_agent import Task02_DDPG
+from quad_controller_rl.agents.task03_ddpg_agent import Task03_DDPG
+from quad_controller_rl.agents.task04_ddpg_agent import Task04_DDPG

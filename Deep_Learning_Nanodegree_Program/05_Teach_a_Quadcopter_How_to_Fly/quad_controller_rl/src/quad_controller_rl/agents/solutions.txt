@@ -1,0 +1,7 @@
+https://keon.io/deep-q-learning/
+
+For the ones who still struggle hard with the ddpg solution and have theirs nerves already totally frazzled:
+I finally graduated today with a DQN solution based upon this tutorial https://keon.io/deep-q-learning/. I adapted it and used 16 discrete thrust levels and converted them back to the continous action space. If you get all tasks well setup and the network trained for this easier approach, they will also work with a DDPG agent, but you have a safe solution in your drawer in any case. It converges after about 200 episodes.
+
+MarI/O
+https://www.youtube.com/watch?v=qv6UVOQ0F44
