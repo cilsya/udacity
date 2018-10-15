@@ -1,0 +1,1570 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{project\_1\_starter}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Project 1: Trading with
+Momentum}\label{project-1-trading-with-momentum}
+
+\subsection{Instructions}\label{instructions}
+
+Each problem consists of a function to implement and instructions on how
+to implement the function. The parts of the function that need to be
+implemented are marked with a \texttt{\#\ TODO} comment. After
+implementing the function, run the cell to test it against the unit
+tests we've provided. For each problem, we provide one or more unit
+tests from our \texttt{project\_tests} package. These unit tests won't
+tell you if your answer is correct, but will warn you of any major
+errors. Your code will be checked for the correct solution when you
+submit it to Udacity.
+
+\subsection{Packages}\label{packages}
+
+When you implement the functions, you'll only need to you use the
+packages you've used in the classroom, like
+\href{https://pandas.pydata.org/}{Pandas} and
+\href{http://www.numpy.org/}{Numpy}. These packages will be imported for
+you. We recommend you don't add any import statements, otherwise the
+grader might not be able to run your code.
+
+The other packages that we're importing are \texttt{helper},
+\texttt{project\_helper}, and \texttt{project\_tests}. These are custom
+packages built to help you solve the problems. The \texttt{helper} and
+\texttt{project\_helper} module contains utility functions and graph
+functions. The \texttt{project\_tests} contains the unit tests for all
+the problems.
+
+\subsubsection{Install Packages}\label{install-packages}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{o}{!}\PY{o}{\PYZob{}}sys.executable\PY{o}{\PYZcb{}} \PYZhy{}m pip install \PYZhy{}r requirements.txt
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Requirement already satisfied: colour==0.1.5 in /opt/conda/lib/python3.6/site-packages (from -r requirements.txt (line 1))
+Collecting cvxpy==1.0.3 (from -r requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/a1/59/2613468ffbbe3a818934d06b81b9f4877fe054afbf4f99d2f43f398a0b34/cvxpy-1.0.3.tar.gz (880kB)
+    100\% |████████████████████████████████| 880kB 686kB/s ta 0:00:011   24\% |███████▉                        | 215kB 4.8MB/s eta 0:00:01
+Requirement already satisfied: cycler==0.10.0 in /opt/conda/lib/python3.6/site-packages/cycler-0.10.0-py3.6.egg (from -r requirements.txt (line 3))
+Collecting numpy==1.13.3 (from -r requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/57/a7/e3e6bd9d595125e1abbe162e323fd2d06f6f6683185294b79cd2cdb190d5/numpy-1.13.3-cp36-cp36m-manylinux1\_x86\_64.whl (17.0MB)
+    100\% |████████████████████████████████| 17.0MB 39kB/s  eta 0:00:01  1\% |▋                               | 296kB 9.2MB/s eta 0:00:02    21\% |██████▊                         | 3.6MB 18.4MB/s eta 0:00:01    31\% |██████████▎                     | 5.4MB 15.0MB/s eta 0:00:01    43\% |█████████████▉                  | 7.3MB 16.6MB/s eta 0:00:01    71\% |██████████████████████▉         | 12.1MB 19.7MB/s eta 0:00:01    76\% |████████████████████████▋       | 13.0MB 16.7MB/s eta 0:00:01
+Collecting pandas==0.21.1 (from -r requirements.txt (line 5))
+  Downloading https://files.pythonhosted.org/packages/3a/e1/6c514df670b887c77838ab856f57783c07e8760f2e3d5939203a39735e0e/pandas-0.21.1-cp36-cp36m-manylinux1\_x86\_64.whl (26.2MB)
+    100\% |████████████████████████████████| 26.2MB 24kB/s  eta 0:00:01  7\% |██▌                             | 2.1MB 20.4MB/s eta 0:00:02    40\% |█████████████                   | 10.6MB 19.3MB/s eta 0:00:01    51\% |████████████████▍               | 13.4MB 19.0MB/s eta 0:00:01    54\% |█████████████████▋              | 14.4MB 17.8MB/s eta 0:00:01    58\% |██████████████████▊             | 15.4MB 22.8MB/s eta 0:00:01    62\% |███████████████████▉            | 16.3MB 15.3MB/s eta 0:00:01    65\% |█████████████████████           | 17.3MB 20.8MB/s eta 0:00:01    73\% |███████████████████████▍        | 19.2MB 22.1MB/s eta 0:00:01    76\% |████████████████████████▌       | 20.1MB 14.3MB/s eta 0:00:01    80\% |█████████████████████████▊      | 21.1MB 23.3MB/s eta 0:00:01    94\% |██████████████████████████████▍ | 24.9MB 16.2MB/s eta 0:00:01
+Collecting plotly==2.2.3 (from -r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/99/a6/8214b6564bf4ace9bec8a26e7f89832792be582c042c47c912d3201328a0/plotly-2.2.3.tar.gz (1.1MB)
+    100\% |████████████████████████████████| 1.1MB 600kB/s ta 0:00:011
+Requirement already satisfied: pyparsing==2.2.0 in /opt/conda/lib/python3.6/site-packages (from -r requirements.txt (line 7))
+Requirement already satisfied: python-dateutil==2.6.1 in /opt/conda/lib/python3.6/site-packages (from -r requirements.txt (line 8))
+Requirement already satisfied: pytz==2017.3 in /opt/conda/lib/python3.6/site-packages (from -r requirements.txt (line 9))
+Requirement already satisfied: requests==2.18.4 in /opt/conda/lib/python3.6/site-packages (from -r requirements.txt (line 10))
+Collecting scipy==1.0.0 (from -r requirements.txt (line 11))
+  Downloading https://files.pythonhosted.org/packages/d8/5e/caa01ba7be11600b6a9d39265440d7b3be3d69206da887c42bef049521f2/scipy-1.0.0-cp36-cp36m-manylinux1\_x86\_64.whl (50.0MB)
+    100\% |████████████████████████████████| 50.0MB 12kB/s  eta 0:00:01  0\% |▎                               | 481kB 16.7MB/s eta 0:00:03    14\% |████▋                           | 7.2MB 18.7MB/s eta 0:00:03    29\% |█████████▍                      | 14.6MB 19.5MB/s eta 0:00:02    36\% |███████████▉                    | 18.5MB 20.3MB/s eta 0:00:02    38\% |████████████▍                   | 19.4MB 16.0MB/s eta 0:00:02    42\% |█████████████▋                  | 21.2MB 20.2MB/s eta 0:00:02    46\% |██████████████▉                 | 23.2MB 20.0MB/s eta 0:00:02    48\% |███████████████▍                | 24.1MB 17.2MB/s eta 0:00:02    53\% |█████████████████▎              | 26.9MB 21.2MB/s eta 0:00:02    55\% |█████████████████▉              | 28.0MB 21.0MB/s eta 0:00:02    61\% |███████████████████▊            | 30.9MB 20.1MB/s eta 0:00:01    63\% |████████████████████▍           | 31.8MB 18.6MB/s eta 0:00:01    66\% |█████████████████████▍          | 33.5MB 16.2MB/s eta 0:00:02    70\% |██████████████████████▋         | 35.3MB 20.4MB/s eta 0:00:01    72\% |███████████████████████▎        | 36.3MB 20.3MB/s eta 0:00:01    74\% |███████████████████████▉        | 37.3MB 19.6MB/s eta 0:00:01    76\% |████████████████████████▌       | 38.3MB 19.8MB/s eta 0:00:01    80\% |█████████████████████████▊      | 40.2MB 17.7MB/s eta 0:00:01    84\% |███████████████████████████     | 42.1MB 19.8MB/s eta 0:00:01    87\% |████████████████████████████▏   | 44.0MB 24.0MB/s eta 0:00:01    89\% |████████████████████████████▊   | 45.0MB 18.0MB/s eta 0:00:01    95\% |██████████████████████████████▌ | 47.6MB 20.5MB/s eta 0:00:01    97\% |███████████████████████████████▏| 48.7MB 21.8MB/s eta 0:00:01    99\% |███████████████████████████████▉| 49.7MB 17.8MB/s eta 0:00:01
+Requirement already satisfied: scikit-learn==0.19.1 in /opt/conda/lib/python3.6/site-packages (from -r requirements.txt (line 12))
+Requirement already satisfied: six==1.11.0 in /opt/conda/lib/python3.6/site-packages (from -r requirements.txt (line 13))
+Collecting tqdm==4.19.5 (from -r requirements.txt (line 14))
+  Downloading https://files.pythonhosted.org/packages/71/3c/341b4fa23cb3abc335207dba057c790f3bb329f6757e1fcd5d347bcf8308/tqdm-4.19.5-py2.py3-none-any.whl (51kB)
+    100\% |████████████████████████████████| 61kB 3.7MB/s eta 0:00:01
+Collecting osqp (from cvxpy==1.0.3->-r requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/43/f2/bbeb83c0da6fd89a6d835b98d85ec76c04f39a476c065e3c99b6b709c493/osqp-0.4.1-cp36-cp36m-manylinux1\_x86\_64.whl (146kB)
+    100\% |████████████████████████████████| 153kB 3.5MB/s eta 0:00:01
+Collecting ecos>=2 (from cvxpy==1.0.3->-r requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/b6/b4/988b15513b13e8ea2eac65e97d84221ac515a735a93f046e2a2a3d7863fc/ecos-2.0.5.tar.gz (114kB)
+    100\% |████████████████████████████████| 122kB 4.5MB/s eta 0:00:01
+Collecting scs>=1.1.3 (from cvxpy==1.0.3->-r requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/b3/fd/6e01c4f4a69fcc6c3db130ba55572089e78e77ea8c0921a679f9da1ec04c/scs-2.0.2.tar.gz (133kB)
+    100\% |████████████████████████████████| 143kB 3.5MB/s eta 0:00:01
+Collecting multiprocess (from cvxpy==1.0.3->-r requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/7a/ee/b9bf3e171f936743758ef924622d8dd00516c5532b00a1210a09bce68325/multiprocess-0.70.6.1.tar.gz (1.4MB)
+    100\% |████████████████████████████████| 1.4MB 476kB/s eta 0:00:01  5\% |█▉                              | 81kB 12.0MB/s eta 0:00:01    64\% |████████████████████▌           | 890kB 18.1MB/s eta 0:00:01
+Requirement already satisfied: fastcache in /opt/conda/lib/python3.6/site-packages (from cvxpy==1.0.3->-r requirements.txt (line 2))
+Requirement already satisfied: toolz in /opt/conda/lib/python3.6/site-packages (from cvxpy==1.0.3->-r requirements.txt (line 2))
+Requirement already satisfied: decorator>=4.0.6 in /opt/conda/lib/python3.6/site-packages (from plotly==2.2.3->-r requirements.txt (line 6))
+Requirement already satisfied: nbformat>=4.2 in /opt/conda/lib/python3.6/site-packages (from plotly==2.2.3->-r requirements.txt (line 6))
+Requirement already satisfied: chardet<3.1.0,>=3.0.2 in /opt/conda/lib/python3.6/site-packages (from requests==2.18.4->-r requirements.txt (line 10))
+Requirement already satisfied: idna<2.7,>=2.5 in /opt/conda/lib/python3.6/site-packages (from requests==2.18.4->-r requirements.txt (line 10))
+Requirement already satisfied: urllib3<1.23,>=1.21.1 in /opt/conda/lib/python3.6/site-packages (from requests==2.18.4->-r requirements.txt (line 10))
+Requirement already satisfied: certifi>=2017.4.17 in /opt/conda/lib/python3.6/site-packages (from requests==2.18.4->-r requirements.txt (line 10))
+Requirement already satisfied: future in /opt/conda/lib/python3.6/site-packages (from osqp->cvxpy==1.0.3->-r requirements.txt (line 2))
+Collecting dill>=0.2.8.1 (from multiprocess->cvxpy==1.0.3->-r requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/6f/78/8b96476f4ae426db71c6e86a8e6a81407f015b34547e442291cd397b18f3/dill-0.2.8.2.tar.gz (150kB)
+    100\% |████████████████████████████████| 153kB 3.3MB/s ta 0:00:01
+Requirement already satisfied: ipython-genutils in /opt/conda/lib/python3.6/site-packages (from nbformat>=4.2->plotly==2.2.3->-r requirements.txt (line 6))
+Requirement already satisfied: jsonschema!=2.5.0,>=2.4 in /opt/conda/lib/python3.6/site-packages (from nbformat>=4.2->plotly==2.2.3->-r requirements.txt (line 6))
+Requirement already satisfied: traitlets>=4.1 in /opt/conda/lib/python3.6/site-packages (from nbformat>=4.2->plotly==2.2.3->-r requirements.txt (line 6))
+Requirement already satisfied: jupyter-core in /opt/conda/lib/python3.6/site-packages (from nbformat>=4.2->plotly==2.2.3->-r requirements.txt (line 6))
+Building wheels for collected packages: cvxpy, plotly, ecos, scs, multiprocess, dill
+  Running setup.py bdist\_wheel for cvxpy {\ldots} done
+  Stored in directory: /root/.cache/pip/wheels/2b/60/0b/0c2596528665e21d698d6f84a3406c52044c7b4ca6ac737cf3
+  Running setup.py bdist\_wheel for plotly {\ldots} done
+  Stored in directory: /root/.cache/pip/wheels/98/54/81/dd92d5b0858fac680cd7bdb8800eb26c001dd9f5dc8b1bc0ba
+  Running setup.py bdist\_wheel for ecos {\ldots} done
+  Stored in directory: /root/.cache/pip/wheels/50/91/1b/568de3c087b3399b03d130e71b1fd048ec072c45f72b6b6e9a
+  Running setup.py bdist\_wheel for scs {\ldots} done
+  Stored in directory: /root/.cache/pip/wheels/ff/f0/aa/530ccd478d7d9900b4e9ef5bc5a39e895ce110bed3d3ac653e
+  Running setup.py bdist\_wheel for multiprocess {\ldots} done
+  Stored in directory: /root/.cache/pip/wheels/8b/36/e5/96614ab62baf927e9bc06889ea794a8e87552b84bb6bf65e3e
+  Running setup.py bdist\_wheel for dill {\ldots} done
+  Stored in directory: /root/.cache/pip/wheels/e2/5d/17/f87cb7751896ac629b435a8696f83ee75b11029f5d6f6bda72
+Successfully built cvxpy plotly ecos scs multiprocess dill
+Installing collected packages: numpy, scipy, osqp, ecos, scs, dill, multiprocess, cvxpy, pandas, plotly, tqdm
+  Found existing installation: numpy 1.12.1
+    Uninstalling numpy-1.12.1:
+      Successfully uninstalled numpy-1.12.1
+  Found existing installation: scipy 0.19.1
+    Uninstalling scipy-0.19.1:
+      Successfully uninstalled scipy-0.19.1
+  Found existing installation: dill 0.2.7.1
+    Uninstalling dill-0.2.7.1:
+      Successfully uninstalled dill-0.2.7.1
+  Found existing installation: pandas 0.20.3
+    Uninstalling pandas-0.20.3:
+      Successfully uninstalled pandas-0.20.3
+  Found existing installation: plotly 2.0.15
+    Uninstalling plotly-2.0.15:
+      Successfully uninstalled plotly-2.0.15
+  Found existing installation: tqdm 4.11.2
+    Uninstalling tqdm-4.11.2:
+      Successfully uninstalled tqdm-4.11.2
+Successfully installed cvxpy-1.0.3 dill-0.2.8.2 ecos-2.0.5 multiprocess-0.70.6.1 numpy-1.13.3 osqp-0.4.1 pandas-0.21.1 plotly-2.2.3 scipy-1.0.0 scs-2.0.2 tqdm-4.19.5
+\textcolor{ansi-yellow}{You are using pip version 9.0.1, however version 18.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.}
+
+    \end{Verbatim}
+
+    \subsubsection{Load Packages}\label{load-packages}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{helper}
+        \PY{k+kn}{import} \PY{n+nn}{project\PYZus{}helper}
+        \PY{k+kn}{import} \PY{n+nn}{project\PYZus{}tests}
+\end{Verbatim}
+
+
+    
+    
+    \subsection{Market Data}\label{market-data}
+
+\subsubsection{Load Data}\label{load-data}
+
+The data we use for most of the projects is end of day data. This
+contains data for many stocks, but we'll be looking at stocks in the
+S\&P 500. We also made things a little easier to run by narrowing down
+our range of time period instead of using all of the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../../data/project\PYZus{}1/eod\PYZhy{}quotemedia.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{parse\PYZus{}dates}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+        
+        \PY{n}{close} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{pivot}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ticker}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adj\PYZus{}close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loaded Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Loaded Data
+
+    \end{Verbatim}
+
+    \subsubsection{View Data}\label{view-data}
+
+Run the cell below to see what the data looks like for \texttt{close}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{project\PYZus{}helper}\PY{o}{.}\PY{n}{print\PYZus{}dataframe}\PY{p}{(}\PY{n}{close}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \subsubsection{Stock Example}\label{stock-example}
+
+Let's see what a single stock looks like from the closing prices. For
+this example and future display examples in this project, we'll use
+Apple's stock (AAPL). If we tried to graph all the stocks, it would be
+too much information.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{apple\PYZus{}ticker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AAPL}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{project\PYZus{}helper}\PY{o}{.}\PY{n}{plot\PYZus{}stock}\PY{p}{(}\PY{n}{close}\PY{p}{[}\PY{n}{apple\PYZus{}ticker}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ Stock}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{apple\PYZus{}ticker}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \subsection{Resample Adjusted Prices}\label{resample-adjusted-prices}
+
+The trading signal you'll develop in this project does not need to be
+based on daily prices, for instance, you can use month-end prices to
+perform trading once a month. To do this, you must first resample the
+daily adjusted closing prices into monthly buckets, and select the last
+observation of each month.
+
+Implement the \texttt{resample\_prices} to resample
+\texttt{close\_prices} at the sampling frequency of \texttt{freq}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{resample\PYZus{}prices}\PY{p}{(}\PY{n}{close\PYZus{}prices}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Resample close prices for each ticker at specified frequency.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    close\PYZus{}prices : DataFrame}
+        \PY{l+s+sd}{        Close prices for each ticker and date}
+        \PY{l+s+sd}{    freq : str}
+        \PY{l+s+sd}{        What frequency to sample at}
+        \PY{l+s+sd}{        For valid freq choices, see http://pandas.pydata.org/pandas\PYZhy{}docs/stable/timeseries.html\PYZsh{}offset\PYZhy{}aliases}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    prices\PYZus{}resampled : DataFrame}
+        \PY{l+s+sd}{        Resampled prices for each ticker and date}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{c+c1}{\PYZsh{} TODO: Implement Function}
+            
+            \PY{c+c1}{\PYZsh{} Methods to use (i.e. .first(), .max(), .min(), .close())}
+            \PY{c+c1}{\PYZsh{} can be found here}
+            \PY{c+c1}{\PYZsh{} https://pandas.pydata.org/pandas\PYZhy{}docs/version/0.21.0/api.html\PYZsh{}id44}
+            \PY{n}{prices\PYZus{}resampled} \PY{o}{=} \PY{n}{close\PYZus{}prices}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{n}{freq}\PY{p}{)}\PY{o}{.}\PY{n}{last}\PY{p}{(}\PY{p}{)}
+            
+            
+            \PY{k}{return} \PY{n}{prices\PYZus{}resampled}
+        
+        \PY{n}{project\PYZus{}tests}\PY{o}{.}\PY{n}{test\PYZus{}resample\PYZus{}prices}\PY{p}{(}\PY{n}{resample\PYZus{}prices}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tests Passed
+
+    \end{Verbatim}
+
+    \subsubsection{View Data}\label{view-data}
+
+Let's apply this function to \texttt{close} and view the results.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{monthly\PYZus{}close} \PY{o}{=} \PY{n}{resample\PYZus{}prices}\PY{p}{(}\PY{n}{close}\PY{p}{)}
+        \PY{n}{project\PYZus{}helper}\PY{o}{.}\PY{n}{plot\PYZus{}resampled\PYZus{}prices}\PY{p}{(}
+            \PY{n}{monthly\PYZus{}close}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{apple\PYZus{}ticker}\PY{p}{]}\PY{p}{,}
+            \PY{n}{close}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{apple\PYZus{}ticker}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ Stock \PYZhy{} Close Vs Monthly Close}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{apple\PYZus{}ticker}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \subsection{Compute Log Returns}\label{compute-log-returns}
+
+Compute log returns (\(R_t\)) from prices (\(P_t\)) as your primary
+momentum indicator:
+
+\[R_t = log_e(P_t) - log_e(P_{t-1})\]
+
+Implement the \texttt{compute\_log\_returns} function below, such that
+it accepts a dataframe (like one returned by \texttt{resample\_prices}),
+and produces a similar dataframe of log returns. Use Numpy's
+\href{https://docs.scipy.org/doc/numpy/reference/generated/numpy.log.html}{log
+function} to help you calculate the log returns.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{compute\PYZus{}log\PYZus{}returns}\PY{p}{(}\PY{n}{prices}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Compute log returns for each ticker.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    prices : DataFrame}
+        \PY{l+s+sd}{        Prices for each ticker and date}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    log\PYZus{}returns : DataFrame}
+        \PY{l+s+sd}{        Log returns for each ticker and date}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{c+c1}{\PYZsh{} TODO: Implement Function}
+            
+            \PY{n}{log\PYZus{}returns} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{prices}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{prices}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{log\PYZus{}returns}
+        
+        \PY{n}{project\PYZus{}tests}\PY{o}{.}\PY{n}{test\PYZus{}compute\PYZus{}log\PYZus{}returns}\PY{p}{(}\PY{n}{compute\PYZus{}log\PYZus{}returns}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tests Passed
+
+    \end{Verbatim}
+
+    \subsubsection{View Data}\label{view-data}
+
+Using the same data returned from \texttt{resample\_prices}, we'll
+generate the log returns.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{monthly\PYZus{}close\PYZus{}returns} \PY{o}{=} \PY{n}{compute\PYZus{}log\PYZus{}returns}\PY{p}{(}\PY{n}{monthly\PYZus{}close}\PY{p}{)}
+        \PY{n}{project\PYZus{}helper}\PY{o}{.}\PY{n}{plot\PYZus{}returns}\PY{p}{(}
+            \PY{n}{monthly\PYZus{}close\PYZus{}returns}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{apple\PYZus{}ticker}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Log Returns of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ Stock (Monthly)}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{apple\PYZus{}ticker}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \subsection{Shift Returns}\label{shift-returns}
+
+Implement the \texttt{shift\_returns} function to shift the log returns
+to the previous or future returns in the time series. For example, the
+parameter \texttt{shift\_n} is 2 and \texttt{returns} is the following:
+
+\begin{verbatim}
+                           Returns
+               A         B         C         D
+2013-07-08     0.015     0.082     0.096     0.020     ...
+2013-07-09     0.037     0.095     0.027     0.063     ...
+2013-07-10     0.094     0.001     0.093     0.019     ...
+2013-07-11     0.092     0.057     0.069     0.087     ...
+...            ...       ...       ...       ...
+\end{verbatim}
+
+the output of the \texttt{shift\_returns} function would be:
+
+\begin{verbatim}
+                        Shift Returns
+               A         B         C         D
+2013-07-08     NaN       NaN       NaN       NaN       ...
+2013-07-09     NaN       NaN       NaN       NaN       ...
+2013-07-10     0.015     0.082     0.096     0.020     ...
+2013-07-11     0.037     0.095     0.027     0.063     ...
+...            ...       ...       ...       ...
+\end{verbatim}
+
+Using the same \texttt{returns} data as above, the
+\texttt{shift\_returns} function should generate the following with
+\texttt{shift\_n} as -2:
+
+\begin{verbatim}
+                        Shift Returns
+               A         B         C         D
+2013-07-08     0.094     0.001     0.093     0.019     ...
+2013-07-09     0.092     0.057     0.069     0.087     ...
+...            ...       ...       ...       ...       ...
+...            ...       ...       ...       ...       ...
+...            NaN       NaN       NaN       NaN       ...
+...            NaN       NaN       NaN       NaN       ...
+\end{verbatim}
+
+\emph{Note: The "..." represents data points we're not showing.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{shift\PYZus{}returns}\PY{p}{(}\PY{n}{returns}\PY{p}{,} \PY{n}{shift\PYZus{}n}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Generate shifted returns}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Parameters}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    returns : DataFrame}
+         \PY{l+s+sd}{        Returns for each ticker and date}
+         \PY{l+s+sd}{    shift\PYZus{}n : int}
+         \PY{l+s+sd}{        Number of periods to move, can be positive or negative}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    shifted\PYZus{}returns : DataFrame}
+         \PY{l+s+sd}{        Shifted returns for each ticker and date}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{} TODO: Implement Function}
+             \PY{n}{shifted\PYZus{}returns} \PY{o}{=} \PY{n}{returns}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{n}{shift\PYZus{}n}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{shifted\PYZus{}returns}
+         
+         \PY{n}{project\PYZus{}tests}\PY{o}{.}\PY{n}{test\PYZus{}shift\PYZus{}returns}\PY{p}{(}\PY{n}{shift\PYZus{}returns}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tests Passed
+
+    \end{Verbatim}
+
+    \subsubsection{View Data}\label{view-data}
+
+Let's get the previous month's and next month's returns.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{prev\PYZus{}returns} \PY{o}{=} \PY{n}{shift\PYZus{}returns}\PY{p}{(}\PY{n}{monthly\PYZus{}close\PYZus{}returns}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{lookahead\PYZus{}returns} \PY{o}{=} \PY{n}{shift\PYZus{}returns}\PY{p}{(}\PY{n}{monthly\PYZus{}close\PYZus{}returns}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{project\PYZus{}helper}\PY{o}{.}\PY{n}{plot\PYZus{}shifted\PYZus{}returns}\PY{p}{(}
+             \PY{n}{prev\PYZus{}returns}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{apple\PYZus{}ticker}\PY{p}{]}\PY{p}{,}
+             \PY{n}{monthly\PYZus{}close\PYZus{}returns}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{apple\PYZus{}ticker}\PY{p}{]}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Previous Returns of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ Stock}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{apple\PYZus{}ticker}\PY{p}{)}\PY{p}{)}
+         \PY{n}{project\PYZus{}helper}\PY{o}{.}\PY{n}{plot\PYZus{}shifted\PYZus{}returns}\PY{p}{(}
+             \PY{n}{lookahead\PYZus{}returns}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{apple\PYZus{}ticker}\PY{p}{]}\PY{p}{,}
+             \PY{n}{monthly\PYZus{}close\PYZus{}returns}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{apple\PYZus{}ticker}\PY{p}{]}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lookahead Returns of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ Stock}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{apple\PYZus{}ticker}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    
+    
+    \subsection{Generate Trading Signal}\label{generate-trading-signal}
+
+A trading signal is a sequence of trading actions, or results that can
+be used to take trading actions. A common form is to produce a "long"
+and "short" portfolio of stocks on each date (e.g. end of each month, or
+whatever frequency you desire to trade at). This signal can be
+interpreted as rebalancing your portfolio on each of those dates,
+entering long ("buy") and short ("sell") positions as indicated.
+
+Here's a strategy that we will try: \textgreater{} For each month-end
+observation period, rank the stocks by \emph{previous} returns, from the
+highest to the lowest. Select the top performing stocks for the long
+portfolio, and the bottom performing stocks for the short portfolio.
+
+Implement the \texttt{get\_top\_n} function to get the top performing
+stock for each month. Get the top performing stocks from
+\texttt{prev\_returns} by assigning them a value of 1. For all other
+stocks, give them a value of 0. For example, using the following
+\texttt{prev\_returns}:
+
+\begin{verbatim}
+                                     Previous Returns
+               A         B         C         D         E         F         G
+2013-07-08     0.015     0.082     0.096     0.020     0.075     0.043     0.074
+2013-07-09     0.037     0.095     0.027     0.063     0.024     0.086     0.025
+...            ...       ...       ...       ...       ...       ...       ...
+\end{verbatim}
+
+The function \texttt{get\_top\_n} with \texttt{top\_n} set to 3 should
+return the following:
+
+\begin{verbatim}
+                                     Previous Returns
+               A         B         C         D         E         F         G
+2013-07-08     0         1         1         0         1         0         0
+2013-07-09     0         1         0         1         0         1         0
+...            ...       ...       ...       ...       ...       ...       ...
+\end{verbatim}
+
+\emph{Note: You may have to use Panda's
+\href{https://pandas.pydata.org/pandas-docs/version/0.21/generated/pandas.DataFrame.iterrows.html}{\texttt{DataFrame.iterrows}}
+with
+\href{https://pandas.pydata.org/pandas-docs/version/0.21/generated/pandas.Series.nlargest.html}{\texttt{Series.nlargest}}
+in order to implement the function. This is one of those cases where
+creating a vecorization solution is too difficult.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} DEBUG}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{prev\PYZus{}returns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} ticker               A         AAL         AAP        AAPL        ABBV  \textbackslash{}
+         date                                                                     
+         2013-07-31         nan         nan         nan         nan         nan   
+         2013-08-31         nan         nan         nan         nan         nan   
+         2013-09-30  0.04181412 -0.18015337 -0.02977582  0.08044762 -0.06518370   
+         2013-10-31  0.09657861  0.15979244  0.03282284 -0.02171531  0.04855545   
+         2013-11-30 -0.00960698  0.14734639  0.18195865  0.09201927  0.08860637   
+         2013-12-31  0.05388057  0.06647111  0.01828314  0.06772063  0.00000000   
+         2014-01-31  0.06769609  0.07267716  0.09197258  0.00886237  0.08616823   
+         2014-02-28  0.01664682  0.28421071  0.03663543 -0.11394918 -0.06220213   
+         2014-03-31 -0.02120344  0.09598737  0.10373913  0.05588347  0.03355617   
+         2014-04-30 -0.01790035 -0.00897599 -0.00629368  0.01975642  0.00957880   
+         2014-05-31 -0.03182502 -0.04270218 -0.04205794  0.09476126  0.02214224   
+         2014-06-30  0.05227357  0.13552541  0.02346722  0.07577509  0.04229556   
+         2014-07-31  0.01103586  0.06739797  0.08351026  0.02728625  0.03810157   
+         2014-08-31 -0.02378338 -0.09799068 -0.10798279  0.02832630 -0.06780436   
+         2014-09-30  0.01889681  0.00079762  0.11903914  0.07465224  0.05465028   
+         2014-10-31 -0.00082047 -0.09153654 -0.04545245 -0.01722060  0.04388532   
+         2014-11-30 -0.03028915  0.15558158  0.12032096  0.06948903  0.10172478   
+         2014-12-31  0.06740128  0.16010974  0.00081622  0.10071836  0.08659108   
+         2015-01-31 -0.04302767  0.09992645  0.08005917 -0.07460613 -0.05586717   
+         2015-02-28 -0.07812999 -0.08865699 -0.00175946  0.05961156 -0.07327254   
+         2015-03-31  0.11114202 -0.02228945 -0.02593080  0.09598802  0.00248242   
+         2015-04-30 -0.01333009  0.09701683 -0.03400439 -0.03187426 -0.03293308   
+         2015-05-31 -0.00434154 -0.08694248 -0.04572186  0.00576971  0.10773129   
+         2015-06-30 -0.00436047 -0.13068039  0.06903017  0.04431573  0.02941164   
+         2015-07-31 -0.06296587 -0.05918743  0.03922895 -0.03797801  0.00897001   
+         2015-08-31  0.05961780  0.00412320  0.08953503 -0.03344115  0.04841767   
+         2015-09-30 -0.12025862 -0.02595965  0.00595206 -0.06849869 -0.11491257   
+         2015-10-31 -0.05317503 -0.00385555  0.07866971 -0.02523595 -0.13717756   
+         2015-11-30  0.09523073  0.17421946  0.04588907  0.08329065  0.09970324   
+         2015-12-31  0.10212435 -0.11137087 -0.19834401 -0.00580146 -0.02379042   
+         2016-01-31  0.00250761  0.02607491 -0.07765707 -0.11679029  0.01857111   
+         2016-02-29 -0.10480259 -0.08266322  0.01017989 -0.07822348 -0.06500804   
+         2016-03-31 -0.00800004  0.05307585 -0.02402858 -0.00133143 -0.00529633   
+         2016-04-30  0.06478949  0.00024387  0.07749311  0.11974615  0.04493730   
+         2016-05-31  0.02934536 -0.16736448 -0.02679973 -0.15073114  0.07532447   
+         2016-06-30  0.11462829 -0.08063179 -0.01458373  0.06933886  0.03114913   
+         2016-07-31 -0.03131999 -0.11970434  0.04978712 -0.04359639 -0.01634128   
+         2016-08-31  0.08115189  0.22631760  0.04966480  0.08623527  0.07621369   
+         2016-09-30 -0.02376808  0.02526745 -0.07631131  0.02334347 -0.03268917   
+         2016-10-31  0.00477784  0.00850369 -0.05350196  0.06344815 -0.01619914   
+         2016-11-30 -0.07769182  0.10344664 -0.06253766  0.00432500 -0.11356073   
+         2016-12-31  0.00936614  0.13692923  0.19193633 -0.02178228  0.08617441   
+         2017-01-31  0.03818318  0.00536885 -0.00319576  0.04684076  0.02949493   
+         2017-02-28  0.07217773 -0.05367464 -0.02927975  0.04664167 -0.01399583   
+         2017-03-31  0.04648289  0.04873915 -0.04757013  0.12552425  0.01187489   
+         2017-04-30  0.03263890 -0.09164993 -0.05439459  0.04754147  0.05229538   
+         2017-05-31  0.04040579  0.00753654 -0.04215500 -0.00006961  0.02182202   
+         2017-06-30  0.09175337  0.12956238 -0.06173770  0.06557216  0.00121249   
+         
+         ticker             ABC         ABT         ACN        ADBE         ADI  \textbackslash{}
+         date                                                                     
+         2013-07-31         nan         nan         nan         nan         nan   
+         2013-08-31         nan         nan         nan         nan         nan   
+         2013-09-30 -0.01609335 -0.09440968 -0.02136190 -0.03289558 -0.05749847   
+         2013-10-31  0.07086509 -0.00420927  0.01905603  0.12689741  0.01650096   
+         2013-11-30  0.06693948  0.10058564  0.01124304  0.04296064  0.04671322   
+         2013-12-31  0.07997603  0.04389252  0.05260536  0.04613431 -0.02215021   
+         2014-01-31 -0.00312412  0.00365918  0.05950782  0.05314171  0.06162558   
+         2014-02-28 -0.04494321 -0.03893724 -0.02887307 -0.01157325 -0.05364189   
+         2014-03-31  0.01278407  0.08167803  0.04252310  0.14797715  0.05873111   
+         2014-04-30 -0.03387614 -0.03244633 -0.04452811 -0.04302219  0.04463996   
+         2014-05-31 -0.00627057  0.01187986  0.01803285 -0.06358573 -0.03543414   
+         2014-06-30  0.11924492  0.03225676  0.01521647  0.04516334  0.02805861   
+         2014-07-31 -0.00713113  0.02200064 -0.00751744  0.11436847  0.03175466   
+         2014-08-31  0.05684488  0.03470536 -0.01948600 -0.04393196 -0.08568401   
+         2014-09-30  0.00928406  0.00284495  0.02220373  0.03755456  0.02958032   
+         2014-10-31 -0.00116362 -0.01550789  0.00320237 -0.03841992 -0.02506897   
+         2014-11-30  0.09976923  0.05225014  0.01089553  0.01335172  0.00262335   
+         2014-12-31  0.06719583  0.02088612  0.06224762  0.04952333  0.09637224   
+         2015-01-31 -0.00982294  0.01139295  0.03393630 -0.01339001  0.02250327   
+         2015-02-28  0.05281720 -0.00042641 -0.06093959 -0.03599072 -0.06348240   
+         2015-03-31  0.08089383  0.05667423  0.06896907  0.12036221  0.12320729   
+         2015-04-30  0.10090334 -0.02219942  0.03984851 -0.06745892  0.07342445   
+         2015-05-31  0.00552706  0.00708541 -0.00049630  0.02826855 -0.01858432   
+         2015-06-30 -0.01281413  0.04589313  0.03593582  0.03906394  0.10020918   
+         2015-07-31 -0.05684490  0.00982809  0.00767559  0.02398616 -0.05714976   
+         2015-08-31 -0.00556369  0.03709245  0.06335602  0.01202468 -0.09565300   
+         2015-09-30 -0.05271992 -0.11264239 -0.08963337 -0.04260734 -0.03591771   
+         2015-10-31 -0.05179848 -0.11872187  0.04145402  0.04540863  0.00979789   
+         2015-11-30  0.01587501  0.11369172  0.09776101  0.07541025  0.06369612   
+         2015-12-31  0.02533250  0.00267499  0.00018655  0.03109289  0.02480620   
+         2016-01-31  0.05012168 -0.00022264 -0.02569573  0.02675456 -0.10145040   
+         2016-02-29 -0.14668975 -0.16459543  0.00990296 -0.05256030 -0.02674642   
+         2016-03-31 -0.02946371  0.02324168 -0.05132322 -0.04568157 -0.00821101   
+         2016-04-30 -0.00080845  0.07674113  0.14063754  0.09675045  0.11064939   
+         2016-05-31 -0.01689525 -0.06663976 -0.01220169  0.00446762 -0.04970290   
+         2016-06-30 -0.12208554  0.01859216  0.05219176  0.05422362  0.04515902   
+         2016-07-31  0.05626889 -0.00810747 -0.04892046 -0.03769780 -0.03231130   
+         2016-08-31  0.07139375  0.13578830 -0.00424592  0.02137959  0.11950785   
+         2016-09-30  0.02449340 -0.06294575  0.01922714  0.04446953 -0.01342097   
+         2016-10-31 -0.07383382  0.00640496  0.06048139  0.05911135  0.02976363   
+         2016-11-30 -0.13867316 -0.06852950 -0.03945196 -0.00953490 -0.00544537   
+         2016-12-31  0.10806742 -0.03027006  0.02707341 -0.04470124  0.15250011   
+         2017-01-31  0.00256115  0.00889127 -0.01944600  0.00136081 -0.02206272   
+         2017-02-28  0.10997958  0.09029065 -0.02822698  0.09650158  0.03144743   
+         2017-03-31  0.05135996  0.07626031  0.07305358  0.04281683  0.09464624   
+         2017-04-30 -0.03344570 -0.01497402 -0.02161979  0.09497211  0.00024408   
+         2017-05-31 -0.07567373 -0.01142815  0.02214547  0.02736367 -0.07274784   
+         2017-06-30  0.11615820  0.04524848  0.02579791  0.05894304  0.11819123   
+         
+         ticker         {\ldots}              XL        XLNX         XOM        XRAY  \textbackslash{}
+         date           {\ldots}                                                       
+         2013-07-31     {\ldots}             nan         nan         nan         nan   
+         2013-08-31     {\ldots}             nan         nan         nan         nan   
+         2013-09-30     {\ldots}     -0.05879217 -0.06720501 -0.06596571 -0.02097402   
+         2013-10-31     {\ldots}      0.04630944  0.07605219 -0.01293321  0.03481157   
+         2013-11-30     {\ldots}     -0.00814469 -0.03082169  0.04076620  0.08157415   
+         2013-12-31     {\ldots}      0.04540422 -0.01674184  0.04899644  0.00961292   
+         2014-01-31     {\ldots}     -0.00005037  0.03298584  0.07935125  0.02044076   
+         2014-02-28     {\ldots}     -0.10243348  0.01082965 -0.09357256 -0.04947109   
+         2014-03-31     {\ldots}      0.05615273  0.12286783  0.05062164 -0.01660877   
+         2014-04-30     {\ldots}      0.03284340  0.03888909  0.01454009  0.01589505   
+         2014-05-31     {\ldots}      0.00319489 -0.13978958  0.04728753 -0.03110431   
+         2014-06-30     {\ldots}      0.03479430  0.00123427 -0.01178295  0.05789258   
+         2014-07-31     {\ldots}      0.01315416  0.00742551  0.00149098  0.00264665   
+         2014-08-31     {\ldots}     -0.01508417 -0.13998391 -0.01743356 -0.01983642   
+         2014-09-30     {\ldots}      0.05843276  0.03386045  0.01220640  0.02730581   
+         2014-10-31     {\ldots}     -0.02525829  0.00236407 -0.05592900 -0.04369616   
+         2014-11-30     {\ldots}      0.02117902  0.04253010  0.02789025  0.10739791   
+         2014-12-31     {\ldots}      0.04727105  0.03443096 -0.05880687  0.07966385   
+         2015-01-31     {\ldots}     -0.02838693 -0.04847111  0.02087622 -0.03037006   
+         2015-02-28     {\ldots}      0.00348534 -0.11531726 -0.05594387 -0.06285044   
+         2015-03-31     {\ldots}      0.04838969  0.10127687  0.02024303  0.05795769   
+         2015-04-30     {\ldots}      0.02092430 -0.00165348 -0.04080317 -0.03938489   
+         2015-05-31     {\ldots}      0.00757990  0.02475027  0.02750072  0.00215919   
+         2015-06-30     {\ldots}      0.01605171  0.09654661 -0.01677365  0.02009094   
+         2015-07-31     {\ldots}     -0.00860127 -0.07122468 -0.02375409 -0.00797670   
+         2015-08-31     {\ldots}      0.02180358 -0.05611995 -0.04914479  0.09891886   
+         2015-09-30     {\ldots}     -0.01938714  0.01075955 -0.04204308 -0.08237366   
+         2015-10-31     {\ldots}     -0.02096434  0.01139343 -0.01189933 -0.03437113   
+         2015-11-30     {\ldots}      0.04732066  0.11681228  0.10691949  0.18505330   
+         2015-12-31     {\ldots}      0.00262261  0.04908477 -0.00427045 -0.00312732   
+         2016-01-31     {\ldots}      0.03118510 -0.05629461 -0.04649669  0.00432337   
+         2016-02-29     {\ldots}     -0.07745121  0.06789938 -0.00128370 -0.03274052   
+         2016-03-31     {\ldots}     -0.05324021 -0.05604739  0.03819057  0.03454661   
+         2016-04-30     {\ldots}      0.07359389  0.00443741  0.04202402  0.01220241   
+         2016-05-31     {\ldots}     -0.11720576 -0.09619609  0.05594807 -0.03349319   
+         2016-06-30     {\ldots}      0.04830993  0.10290823  0.01539863  0.04205613   
+         2016-07-31     {\ldots}     -0.02466162 -0.02694774  0.05166393 -0.00071206   
+         2016-08-31     {\ldots}      0.03828501  0.10192953 -0.05245058  0.03172855   
+         2016-09-30     {\ldots}     -0.01104021  0.06579968 -0.01191629 -0.04112133   
+         2016-10-31     {\ldots}     -0.01178072  0.00239521  0.00160532 -0.03228879   
+         2016-11-30     {\ldots}      0.03132116 -0.06598725 -0.04643273 -0.03179755   
+         2016-12-31     {\ldots}      0.04038386  0.06594093  0.05541489  0.01054005   
+         2017-01-31     {\ldots}      0.03615589  0.11187869  0.03334393 -0.00643281   
+         2017-02-28     {\ldots}      0.00828549 -0.03660694 -0.07318798 -0.01800276   
+         2017-03-31     {\ldots}      0.07484917  0.01624776 -0.02195182  0.11358061   
+         2017-04-30     {\ldots}     -0.01017620 -0.01593728  0.00844920 -0.01575947   
+         2017-05-31     {\ldots}      0.04871848  0.08633458 -0.00439937  0.01273092   
+         2017-06-30     {\ldots}      0.04302745  0.06090411 -0.00482798  0.00441780   
+         
+         ticker             XRX         XYL         YUM         ZBH        ZION  \textbackslash{}
+         date                                                                     
+         2013-07-31         nan         nan         nan         nan         nan   
+         2013-08-31         nan         nan         nan         nan         nan   
+         2013-09-30  0.02845720 -0.00134868 -0.04058203 -0.05402072 -0.05663911   
+         2013-10-31  0.03611367  0.11966450  0.01937689  0.04028369 -0.01985983   
+         2013-11-30 -0.03460553  0.21535825 -0.04870385  0.06287079  0.03494040   
+         2013-12-31  0.13529041  0.00173762  0.13869403  0.04405904  0.03381174   
+         2014-01-31  0.07181852  0.00115674 -0.02700927  0.02143144  0.02125228   
+         2014-02-28 -0.11480883 -0.03649610 -0.11361565  0.00833515 -0.04122539   
+         2014-03-31  0.01282069  0.16849675  0.09821667 -0.00138443  0.08307315   
+         2014-04-30  0.03352930 -0.07737790  0.01752905  0.01022814 -0.00707626   
+         2014-05-31  0.06757594  0.03161998  0.02580642  0.02320097 -0.06880844   
+         2014-06-30  0.02127740 -0.00437311  0.00414777  0.07510359 -0.01005896   
+         2014-07-31  0.01231307  0.04661750  0.04909193 -0.00262106  0.03031579   
+         2014-08-31  0.06383490 -0.10201119 -0.15259272 -0.03717391 -0.02230321   
+         2014-09-30  0.04064098  0.05432073  0.04273371 -0.00762369  0.01245116   
+         2014-10-31 -0.03818588 -0.04527723 -0.00623228  0.01452958 -0.00274914   
+         2014-11-30  0.00377217  0.02786669  0.00399386  0.10103487 -0.00310185   
+         2014-12-31  0.04993695  0.05302447  0.07274470  0.00939481 -0.02173021   
+         2015-01-31 -0.00277876 -0.00706717 -0.05864438  0.01193901  0.01590983   
+         2015-02-28 -0.05106548 -0.11012919 -0.00220105 -0.01170641 -0.17386913   
+         2015-03-31  0.03579801  0.04975030  0.11525879  0.07134515  0.11109071   
+         2015-04-30 -0.05485114 -0.01923136 -0.02990901 -0.02227720  0.00986330   
+         2015-05-31 -0.11099678  0.05553898  0.09320743 -0.06758378  0.04826092   
+         2015-06-30 -0.00698083 -0.00836304  0.04714907  0.03992801  0.02108818   
+         2015-07-31 -0.06439073  0.01357979 -0.00033298 -0.04353182  0.09427086   
+         2015-08-31  0.03509132 -0.07097951 -0.02148999 -0.04839200 -0.01732264   
+         2015-09-30 -0.08026959 -0.05779847 -0.09545832 -0.00491259 -0.07084284   
+         2015-10-31 -0.03699314  0.01225130  0.00225395 -0.09522347 -0.05165634   
+         2015-11-30 -0.03556860  0.10289172 -0.11330487  0.10730688  0.04369368   
+         2015-12-31  0.11648057  0.02852030  0.02231302 -0.03463718  0.04255223   
+         2016-01-31  0.01407508 -0.02221712  0.00741965  0.01765935 -0.09297646   
+         2016-02-29 -0.08641291 -0.01518318 -0.00271062 -0.03299779 -0.18540322   
+         2016-03-31 -0.01446306  0.04398671  0.00138083 -0.02499238 -0.05907417   
+         2016-04-30  0.15666230  0.08919201  0.12171562  0.09887961  0.12712017   
+         2016-05-31 -0.15057286  0.02128769 -0.02279296  0.08224057  0.12814724   
+         2016-06-30  0.03781749  0.07021508  0.03130475  0.05331681  0.02029299   
+         2016-07-31 -0.04083362 -0.00022394  0.01006008 -0.01224782 -0.10885619   
+         2016-08-31  0.08190528  0.06838052  0.08081880  0.08561205  0.10384723   
+         2016-09-30 -0.04467244  0.06487578  0.01432323 -0.01173551  0.09555297   
+         2016-10-31  0.03568895  0.03078357  0.00110181  0.00504351  0.01395900   
+         2016-11-30 -0.03618485 -0.08180785 -0.04530849 -0.20992565  0.03764481   
+         2016-12-31 -0.04394012  0.06826631  0.02387708 -0.03416331  0.21341820   
+         2017-01-31 -0.06031217 -0.04075737 -0.00094697  0.01539556  0.07851429   
+         2017-02-28  0.14387403 -0.00424973  0.03879000  0.13680848 -0.01994669   
+         2017-03-31  0.07101104 -0.02065858 -0.00320978 -0.01061987  0.06402762   
+         2017-04-30 -0.00497178  0.04271546 -0.02197891  0.04404029 -0.06676818   
+         2017-05-31 -0.02064767  0.02341935  0.03320595 -0.02035146 -0.04804045   
+         2017-06-30 -0.01683069  0.01750300  0.09965606 -0.00368417  0.00296435   
+         
+         ticker             ZTS  
+         date                    
+         2013-07-31         nan  
+         2013-08-31         nan  
+         2013-09-30 -0.02238899  
+         2013-10-31  0.06539579  
+         2013-11-30  0.01922875  
+         2013-12-31 -0.01623981  
+         2014-01-31  0.04825498  
+         2014-02-28 -0.07165581  
+         2014-03-31  0.02150621  
+         2014-04-30 -0.06940744  
+         2014-05-31  0.04700792  
+         2014-06-30  0.01443595  
+         2014-07-31  0.04987535  
+         2014-08-31  0.01963856  
+         2014-09-30  0.07618433  
+         2014-10-31  0.04172452  
+         2014-11-30  0.00372782  
+         2014-12-31  0.19371924  
+         2015-01-31 -0.04320818  
+         2015-02-28 -0.00509269  
+         2015-03-31  0.07569476  
+         2015-04-30  0.00432995  
+         2015-05-31 -0.03944740  
+         2015-06-30  0.11372257  
+         2015-07-31 -0.03163852  
+         2015-08-31  0.01563818  
+         2015-09-30 -0.08592248  
+         2015-10-31 -0.08581672  
+         2015-11-30  0.04347995  
+         2015-12-31  0.08408991  
+         2016-01-31  0.02578879  
+         2016-02-29 -0.10497356  
+         2016-03-31 -0.04732782  
+         2016-04-30  0.07662724  
+         2016-05-31  0.06119388  
+         2016-06-30  0.00825838  
+         2016-07-31  0.00288761  
+         2016-08-31  0.06149185  
+         2016-09-30  0.01240540  
+         2016-10-31  0.01765151  
+         2016-11-30 -0.08441037  
+         2016-12-31  0.05457719  
+         2017-01-31  0.06064797  
+         2017-02-28  0.02796748  
+         2017-03-31 -0.03011775  
+         2017-04-30  0.00112486  
+         2017-05-31  0.05205758  
+         2017-06-30  0.10432630  
+         
+         [48 rows x 495 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{c+c1}{\PYZsh{} DEBUG}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{stop\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{ds\PYZus{}keep} \PY{o}{=} \PY{k+kc}{None}
+         \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{prev\PYZus{}returns}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             
+             \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{n}{stop\PYZus{}iter}\PY{p}{:}
+                 \PY{n}{ds\PYZus{}keep} \PY{o}{=} \PY{n}{row}
+                 \PY{k}{break}
+                 
+             \PY{c+c1}{\PYZsh{} iterate}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{c+c1}{\PYZsh{} DEBUG}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{ds\PYZus{}keep}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}76}]:} ticker
+         A      0.00000000
+         AAL    0.00000000
+         AAP    0.00000000
+         AAPL   0.00000000
+         ABBV   0.00000000
+         ABC    0.00000000
+         ABT    0.00000000
+         ACN    0.00000000
+         ADBE   0.00000000
+         ADI    0.00000000
+         ADM    0.00000000
+         ADP    0.00000000
+         ADS    0.00000000
+         ADSK   0.00000000
+         AEE    0.00000000
+         AEP    0.00000000
+         AES    0.00000000
+         AET    0.00000000
+         AFL    0.00000000
+         AGN    0.00000000
+         AIG    0.00000000
+         AIV    0.00000000
+         AIZ    0.00000000
+         AJG    0.00000000
+         AKAM   0.00000000
+         ALB    0.00000000
+         ALGN   0.00000000
+         ALK    0.00000000
+         ALL    0.00000000
+         ALLE   0.00000000
+                   {\ldots}    
+         VRTX   0.00000000
+         VTR    0.00000000
+         VZ     0.00000000
+         WAT    0.00000000
+         WBA    0.00000000
+         WDC    0.00000000
+         WEC    0.00000000
+         WFC    0.00000000
+         WHR    0.00000000
+         WLTW   0.00000000
+         WM     0.00000000
+         WMB    0.00000000
+         WMT    0.00000000
+         WRK    0.00000000
+         WU     0.00000000
+         WY     0.00000000
+         WYN    0.00000000
+         WYNN   0.00000000
+         XEC    0.00000000
+         XEL    0.00000000
+         XL     0.00000000
+         XLNX   0.00000000
+         XOM    0.00000000
+         XRAY   0.00000000
+         XRX    0.00000000
+         XYL    0.00000000
+         YUM    0.00000000
+         ZBH    0.00000000
+         ZION   0.00000000
+         ZTS    0.00000000
+         Name: 2013-09-30 00:00:00, Length: 495, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{c+c1}{\PYZsh{} DEBUG}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{ds\PYZus{}keep}\PY{p}{[}\PY{n}{ds\PYZus{}keep}\PY{o}{.}\PY{n}{index}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{c+c1}{\PYZsh{} DEBUG}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{ds\PYZus{}keep}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:} ticker
+         INCY   0.36995670
+         BBY    0.17932605
+         Name: 2013-09-30 00:00:00, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{c+c1}{\PYZsh{} DEBUG}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{ds\PYZus{}keep}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{index}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}62}]:} Index(['INCY', 'BBY'], dtype='object', name='ticker')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{c+c1}{\PYZsh{} DEBUG}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{ds\PYZus{}keep}\PY{p}{[}\PY{n}{ds\PYZus{}keep}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}60}]:} ticker
+         INCY   0.36995670
+         BBY    0.17932605
+         Name: 2013-09-30 00:00:00, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{c+c1}{\PYZsh{} DEBUG}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{prev\PYZus{}returns\PYZus{}copy} \PY{o}{=} \PY{n}{prev\PYZus{}returns}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{c+c1}{\PYZsh{} DEBUG}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{prev\PYZus{}returns\PYZus{}copy}\PY{p}{[}\PY{n}{ds\PYZus{}keep}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:} ticker            INCY         BBY
+         date                              
+         2013-07-31         nan         nan
+         2013-08-31         nan         nan
+         2013-09-30  0.36995670  0.17932605
+         2013-10-31  0.11840577  0.04540360
+         2013-11-30  0.02203589  0.13219717
+         2013-12-31  0.17803890 -0.05400232
+         2014-01-31  0.08294374 -0.01252810
+         2014-02-28  0.25781115 -0.52717384
+         2014-03-31 -0.01941809  0.12333730
+         2014-04-30 -0.18288194 -0.00174837
+         2014-05-31 -0.09725527 -0.01834213
+         2014-06-30  0.02018211  0.06458673
+         2014-07-31  0.13019587  0.12007052
+         2014-08-31 -0.17097582 -0.04215310
+         2014-09-30  0.13047860  0.07013584
+         2014-10-31 -0.09984072  0.05789299
+         2014-11-30  0.31274756  0.01624131
+         2014-12-31  0.11920695  0.14354987
+         2015-01-31 -0.03282953 -0.00577466
+         2015-02-28  0.08642989 -0.10200261
+         2015-03-31  0.07420654  0.07916820
+         2015-04-30  0.06548449  0.00980934
+         2015-05-31  0.05827303 -0.08674679
+         2015-06-30  0.12548397  0.00144196
+         2015-07-31 -0.05543498 -0.05534500
+         2015-08-31  0.00067150 -0.00986141
+         2015-09-30  0.10814719  0.12910850
+         2015-10-31 -0.05129782  0.01632263
+         2015-11-30  0.06276466 -0.05795107
+         2015-12-31 -0.02839212 -0.09736768
+         2016-01-31 -0.05201226 -0.03532579
+         2016-02-29 -0.42982583 -0.08638461
+         2016-03-31  0.04082199  0.14814835
+         2016-04-30 -0.01411272  0.02424601
+         2016-05-31 -0.00276358 -0.01115945
+         2016-06-30  0.15527677  0.00280156
+         2016-07-31 -0.05390927 -0.04056841
+         2016-08-31  0.12036368  0.09352606
+         2016-09-30 -0.10645732  0.13561256
+         2016-10-31  0.15069218 -0.00026125
+         2016-11-30 -0.08081191  0.01893947
+         2016-12-31  0.16224868  0.16084701
+         2017-01-31 -0.01994537 -0.06265360
+         2017-02-28  0.18965803  0.04244243
+         2017-03-31  0.09357615 -0.00879870
+         2017-04-30  0.00427335  0.11517363
+         2017-05-31 -0.07283699  0.05270633
+         2017-06-30  0.03983019  0.13654268
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{c+c1}{\PYZsh{} DEBUG}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{n}{prev\PYZus{}returns\PYZus{}copy} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{prev\PYZus{}returns\PYZus{}copy}\PY{p}{[}\PY{n}{ds\PYZus{}keep}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        TypeError                                 Traceback (most recent call last)
+
+        <ipython-input-68-9621efdbce19> in <module>()
+          2 \#
+          3 prev\_returns\_copy = 0
+    ----> 4 prev\_returns\_copy[ds\_keep.nlargest(2).index] = 1
+    
+
+        TypeError: 'int' object does not support item assignment
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} DEBUG}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} list\PYZus{}temp\PYZus{}a = [1,2,3]}
+         
+         \PY{c+c1}{\PYZsh{} s = pd.Series(list\PYZus{}temp\PYZus{}a)}
+         
+         \PY{c+c1}{\PYZsh{} s.size}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}top\PYZus{}n}\PY{p}{(}\PY{n}{prev\PYZus{}returns}\PY{p}{,} \PY{n}{top\PYZus{}n}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Select the top performing stocks}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Parameters}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    prev\PYZus{}returns : DataFrame}
+         \PY{l+s+sd}{        Previous shifted returns for each ticker and date}
+         \PY{l+s+sd}{    top\PYZus{}n : int}
+         \PY{l+s+sd}{        The number of top performing stocks to get}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    top\PYZus{}stocks : DataFrame}
+         \PY{l+s+sd}{        Top stocks for each ticker and date marked with a 1}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{} TODO: Implement Function}
+             
+             
+             
+             \PY{c+c1}{\PYZsh{} https://stackoverflow.com/questions/16476924/how\PYZhy{}to\PYZhy{}iterate\PYZhy{}over\PYZhy{}rows\PYZhy{}in\PYZhy{}a\PYZhy{}dataframe\PYZhy{}in\PYZhy{}pandas/16476974\PYZsh{}16476974}
+             \PY{c+c1}{\PYZsh{} https://knowledge.udacity.com/questions/10343}
+             \PY{c+c1}{\PYZsh{}}
+             \PY{n}{top\PYZus{}stocks} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(} \PY{n}{dtype} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{int64} \PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Cycle through each row.}
+             \PY{c+c1}{\PYZsh{} According to the notes, a vecorization solution is too difficult.}
+             \PY{c+c1}{\PYZsh{} I\PYZsq{}ll take their word for it.}
+             \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{prev\PYZus{}returns}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+         
+                 
+                 \PY{c+c1}{\PYZsh{} Do not affect the actual row since it is mutable}
+                 \PY{c+c1}{\PYZsh{} in the iteration}
+                 \PY{n}{row\PYZus{}copy} \PY{o}{=} \PY{n}{row}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Find the INDEX of the top n largest values.}
+                 \PY{c+c1}{\PYZsh{} NOTE: .nlargest() returns the n largest VALUES }
+                 \PY{c+c1}{\PYZsh{}       in the Series, in sorted order}
+                 \PY{c+c1}{\PYZsh{}}
+                 \PY{c+c1}{\PYZsh{}       by doing .nlargest().index, we get the indices for those values.}
+                 \PY{c+c1}{\PYZsh{}       We will use these indices as a mask.}
+                 \PY{n}{mask\PYZus{}indices} \PY{o}{=} \PY{n}{row\PYZus{}copy}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{n}{top\PYZus{}n}\PY{p}{)}\PY{o}{.}\PY{n}{index}
+                 
+                 \PY{c+c1}{\PYZsh{} Zero\PYZhy{}out all the values in the copy}
+                 \PY{n}{row\PYZus{}copy}\PY{p}{[}\PY{n}{row\PYZus{}copy}\PY{o}{.}\PY{n}{index}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                 
+                 \PY{c+c1}{\PYZsh{} Make the indices of the top n largest values equal 1.}
+                 \PY{n}{row\PYZus{}copy}\PY{p}{[}\PY{n}{mask\PYZus{}indices}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                 
+                 \PY{c+c1}{\PYZsh{} Cast to int64}
+                 \PY{n}{row\PYZus{}copy\PYZus{}int64} \PY{o}{=} \PY{n}{row\PYZus{}copy}\PY{o}{.}\PY{n}{astype}\PY{p}{(} \PY{n}{np}\PY{o}{.}\PY{n}{int64}\PY{p}{,}
+                                                   \PY{n}{copy}\PY{o}{=}\PY{k+kc}{False} \PY{p}{)}
+               
+                 \PY{c+c1}{\PYZsh{} Append to the result Pandas DataFrame}
+                 \PY{c+c1}{\PYZsh{} NOTE: .append() is NOT inplace}
+                 \PY{c+c1}{\PYZsh{} https://stackoverflow.com/questions/33094056/is\PYZhy{}it\PYZhy{}possible\PYZhy{}to\PYZhy{}append\PYZhy{}series\PYZhy{}to\PYZhy{}rows\PYZhy{}of\PYZhy{}dataframe\PYZhy{}without\PYZhy{}making\PYZhy{}a\PYZhy{}list\PYZhy{}first}
+                 \PY{c+c1}{\PYZsh{} http://pandas.pydata.org/pandas\PYZhy{}docs/stable/generated/pandas.DataFrame.append.html}
+                 \PY{n}{top\PYZus{}stocks} \PY{o}{=} \PY{n}{top\PYZus{}stocks}\PY{o}{.}\PY{n}{append}\PY{p}{(} \PY{n}{row\PYZus{}copy\PYZus{}int64}\PY{p}{,} 
+                                                 \PY{n}{ignore\PYZus{}index}\PY{o}{=}\PY{k+kc}{True} \PY{p}{)}
+                 
+                 
+             \PY{c+c1}{\PYZsh{} Cast pandas DataFrame to dtype \PYZdq{}int64\PYZdq{}}
+             \PY{n}{top\PYZus{}stocks} \PY{o}{=} \PY{n}{top\PYZus{}stocks}\PY{o}{.}\PY{n}{astype}\PY{p}{(} \PY{n}{np}\PY{o}{.}\PY{n}{int64} \PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Make the index of the pandas DataFrame to be the same as}
+             \PY{c+c1}{\PYZsh{} the prev\PYZus{}returns.index, which is a TimeStamp}
+             \PY{n}{top\PYZus{}stocks}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{prev\PYZus{}returns}\PY{o}{.}\PY{n}{index}
+             
+             \PY{c+c1}{\PYZsh{} Return the modified pandas DataFrame}
+             \PY{k}{return} \PY{n}{top\PYZus{}stocks}
+         
+         \PY{n}{project\PYZus{}tests}\PY{o}{.}\PY{n}{test\PYZus{}get\PYZus{}top\PYZus{}n}\PY{p}{(}\PY{n}{get\PYZus{}top\PYZus{}n}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tests Passed
+
+    \end{Verbatim}
+
+    \subsubsection{View Data}\label{view-data}
+
+We want to get the best performing and worst performing stocks. To get
+the best performing stocks, we'll use the \texttt{get\_top\_n} function.
+To get the worst performing stocks, we'll also use the
+\texttt{get\_top\_n} function. However, we pass in
+\texttt{-1*prev\_returns} instead of just \texttt{prev\_returns}.
+Multiplying by negative one will flip all the positive returns to
+negative and negative returns to positive. Thus, it will return the
+worst performing stocks.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{n}{top\PYZus{}bottom\PYZus{}n} \PY{o}{=} \PY{l+m+mi}{50}
+         \PY{n}{df\PYZus{}long} \PY{o}{=} \PY{n}{get\PYZus{}top\PYZus{}n}\PY{p}{(}\PY{n}{prev\PYZus{}returns}\PY{p}{,} \PY{n}{top\PYZus{}bottom\PYZus{}n}\PY{p}{)}
+         \PY{n}{df\PYZus{}short} \PY{o}{=} \PY{n}{get\PYZus{}top\PYZus{}n}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{*}\PY{n}{prev\PYZus{}returns}\PY{p}{,} \PY{n}{top\PYZus{}bottom\PYZus{}n}\PY{p}{)}
+         \PY{n}{project\PYZus{}helper}\PY{o}{.}\PY{n}{print\PYZus{}top}\PY{p}{(}\PY{n}{df\PYZus{}long}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Longed Stocks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{project\PYZus{}helper}\PY{o}{.}\PY{n}{print\PYZus{}top}\PY{p}{(}\PY{n}{df\PYZus{}short}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shorted Stocks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10 Most Longed Stocks:
+AMD, INCY, NFX, ILMN, AVGO, SWKS, NVDA, UAL, NFLX, MU
+10 Most Shorted Stocks:
+CHK, RRC, FCX, MRO, WYNN, DVN, FTI, AMD, KORS, NEM
+
+    \end{Verbatim}
+
+    \subsection{Projected Returns}\label{projected-returns}
+
+It's now time to check if your trading signal has the potential to
+become profitable!
+
+We'll start by computing the net returns this portfolio would return.
+For simplicity, we'll assume every stock gets an equal dollar amount of
+investment. This makes it easier to compute a portfolio's returns as the
+simple arithmetic average of the individual stock returns.
+
+Implement the \texttt{portfolio\_returns} function to compute the
+expected portfolio returns. Using \texttt{df\_long} to indicate which
+stocks to long and \texttt{df\_short} to indicate which stocks to short,
+calculate the returns using \texttt{lookahead\_returns}. To help with
+calculation, we've provided you with \texttt{n\_stocks} as the number of
+stocks we're investing in a single period.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{k}{def} \PY{n+nf}{portfolio\PYZus{}returns}\PY{p}{(}\PY{n}{df\PYZus{}long}\PY{p}{,} \PY{n}{df\PYZus{}short}\PY{p}{,} \PY{n}{lookahead\PYZus{}returns}\PY{p}{,} \PY{n}{n\PYZus{}stocks}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    Compute expected returns for the portfolio, assuming equal investment in each long/short stock.}
+          \PY{l+s+sd}{    }
+          \PY{l+s+sd}{    Parameters}
+          \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{l+s+sd}{    df\PYZus{}long : DataFrame}
+          \PY{l+s+sd}{        Top stocks for each ticker and date marked with a 1}
+          \PY{l+s+sd}{    df\PYZus{}short : DataFrame}
+          \PY{l+s+sd}{        Bottom stocks for each ticker and date marked with a 1}
+          \PY{l+s+sd}{    lookahead\PYZus{}returns : DataFrame}
+          \PY{l+s+sd}{        Lookahead returns for each ticker and date}
+          \PY{l+s+sd}{    n\PYZus{}stocks: int}
+          \PY{l+s+sd}{        The number number of stocks chosen for each month}
+          \PY{l+s+sd}{    }
+          \PY{l+s+sd}{    Returns}
+          \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{l+s+sd}{    portfolio\PYZus{}returns : DataFrame}
+          \PY{l+s+sd}{        Expected portfolio returns for each ticker and date}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+          
+              \PY{c+c1}{\PYZsh{} NOTE: In the description for the function, the variable name for }
+              \PY{c+c1}{\PYZsh{}       the return is the same as the function thus overriding it.}
+              \PY{c+c1}{\PYZsh{}       I changed the variable name to result.}
+              \PY{n}{result} \PY{o}{=} \PY{n}{lookahead\PYZus{}returns}\PY{o}{*}\PY{p}{(} \PY{n}{df\PYZus{}long} \PY{o}{\PYZhy{}} \PY{n}{df\PYZus{}short} \PY{p}{)} \PY{o}{/} \PY{n}{n\PYZus{}stocks}
+                      
+              \PY{k}{return} \PY{n}{result}
+          
+          \PY{n}{project\PYZus{}tests}\PY{o}{.}\PY{n}{test\PYZus{}portfolio\PYZus{}returns}\PY{p}{(}\PY{n}{portfolio\PYZus{}returns}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tests Passed
+
+    \end{Verbatim}
+
+    \subsubsection{View Data}\label{view-data}
+
+Time to see how the portfolio did.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{expected\PYZus{}portfolio\PYZus{}returns} \PY{o}{=} \PY{n}{portfolio\PYZus{}returns}\PY{p}{(}\PY{n}{df\PYZus{}long}\PY{p}{,} \PY{n}{df\PYZus{}short}\PY{p}{,} \PY{n}{lookahead\PYZus{}returns}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{top\PYZus{}bottom\PYZus{}n}\PY{p}{)}
+          \PY{n}{project\PYZus{}helper}\PY{o}{.}\PY{n}{plot\PYZus{}returns}\PY{p}{(}\PY{n}{expected\PYZus{}portfolio\PYZus{}returns}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Portfolio Returns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \subsection{Statistical Tests}\label{statistical-tests}
+
+\subsubsection{Annualized Rate of
+Return}\label{annualized-rate-of-return}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{expected\PYZus{}portfolio\PYZus{}returns\PYZus{}by\PYZus{}date} \PY{o}{=} \PY{n}{expected\PYZus{}portfolio\PYZus{}returns}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+          \PY{n}{portfolio\PYZus{}ret\PYZus{}mean} \PY{o}{=} \PY{n}{expected\PYZus{}portfolio\PYZus{}returns\PYZus{}by\PYZus{}date}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+          \PY{n}{portfolio\PYZus{}ret\PYZus{}ste} \PY{o}{=} \PY{n}{expected\PYZus{}portfolio\PYZus{}returns\PYZus{}by\PYZus{}date}\PY{o}{.}\PY{n}{sem}\PY{p}{(}\PY{p}{)}
+          \PY{n}{portfolio\PYZus{}ret\PYZus{}annual\PYZus{}rate} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{portfolio\PYZus{}ret\PYZus{}mean} \PY{o}{*} \PY{l+m+mi}{12}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{100}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+s2}{Mean:                       }\PY{l+s+si}{\PYZob{}:.6f\PYZcb{}}
+          \PY{l+s+s2}{Standard Error:             }\PY{l+s+si}{\PYZob{}:.6f\PYZcb{}}
+          \PY{l+s+s2}{Annualized Rate of Return:  }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZpc{}}
+          \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{portfolio\PYZus{}ret\PYZus{}mean}\PY{p}{,} \PY{n}{portfolio\PYZus{}ret\PYZus{}ste}\PY{p}{,} \PY{n}{portfolio\PYZus{}ret\PYZus{}annual\PYZus{}rate}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Mean:                       0.003303
+Standard Error:             0.002201
+Annualized Rate of Return:  4.04\%
+
+
+    \end{Verbatim}
+
+    The annualized rate of return allows you to compare the rate of return
+from this strategy to other quoted rates of return, which are usually
+quoted on an annual basis.
+
+\subsubsection{T-Test}\label{t-test}
+
+Our null hypothesis (\(H_0\)) is that the actual mean return from the
+signal is zero. We'll perform a one-sample, one-sided t-test on the
+observed mean return, to see if we can reject \(H_0\).
+
+We'll need to first compute the t-statistic, and then find its
+corresponding p-value. The p-value will indicate the probability of
+observing a mean return equally or more extreme than the one we observed
+if the null hypothesis were true. A small p-value means that the chance
+of observing the mean we observed under the null hypothesis is small,
+and thus casts doubt on the null hypothesis. It's good practice to set a
+desired level of significance or alpha (\(\alpha\)) \emph{before}
+computing the p-value, and then reject the null hypothesis if
+\(p < \alpha\).
+
+For this project, we'll use \(\alpha = 0.05\), since it's a common value
+to use.
+
+Implement the \texttt{analyze\_alpha} function to perform a t-test on
+the sample of portfolio returns. We've imported the \texttt{scipy.stats}
+module for you to perform the t-test.
+
+Note:
+\href{https://docs.scipy.org/doc/scipy-1.0.0/reference/generated/scipy.stats.ttest_1samp.html}{\texttt{scipy.stats.ttest\_1samp}}
+performs a two-sided test, so divide the p-value by 2 to get 1-sided
+p-value
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+          
+          \PY{k}{def} \PY{n+nf}{analyze\PYZus{}alpha}\PY{p}{(}\PY{n}{expected\PYZus{}portfolio\PYZus{}returns\PYZus{}by\PYZus{}date}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    Perform a t\PYZhy{}test with the null hypothesis being that the expected mean return is zero.}
+          \PY{l+s+sd}{    }
+          \PY{l+s+sd}{    Parameters}
+          \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{l+s+sd}{    expected\PYZus{}portfolio\PYZus{}returns\PYZus{}by\PYZus{}date : Pandas Series}
+          \PY{l+s+sd}{        Expected portfolio returns for each date}
+          \PY{l+s+sd}{    }
+          \PY{l+s+sd}{    Returns}
+          \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{l+s+sd}{    t\PYZus{}value}
+          \PY{l+s+sd}{        T\PYZhy{}statistic from t\PYZhy{}test}
+          \PY{l+s+sd}{    p\PYZus{}value}
+          \PY{l+s+sd}{        Corresponding p\PYZhy{}value}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{c+c1}{\PYZsh{} TODO: Implement Function}
+          
+              \PY{c+c1}{\PYZsh{} Note: scipy.stats.ttest\PYZus{}1samp performs a two\PYZhy{}sided test, so divide the p\PYZhy{}value by 2 to get 1\PYZhy{}sided p\PYZhy{}value}
+              \PY{c+c1}{\PYZsh{}}
+              \PY{c+c1}{\PYZsh{} scipy.stats.ttest\PYZus{}1samp}
+              \PY{c+c1}{\PYZsh{} https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest\PYZus{}1samp.html}
+              \PY{n}{t\PYZus{}value}\PY{p}{,} \PY{n}{p\PYZus{}value} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{ttest\PYZus{}1samp}\PY{p}{(} \PY{n}{expected\PYZus{}portfolio\PYZus{}returns\PYZus{}by\PYZus{}date}\PY{p}{,}
+                                                    \PY{l+m+mi}{0} \PY{p}{)}
+              \PY{n}{p\PYZus{}value\PYZus{}half} \PY{o}{=}  \PY{n}{p\PYZus{}value}\PY{o}{/}\PY{l+m+mi}{2}
+              
+              \PY{k}{return} \PY{n}{t\PYZus{}value}\PY{p}{,} \PY{n}{p\PYZus{}value\PYZus{}half}
+          
+          \PY{n}{project\PYZus{}tests}\PY{o}{.}\PY{n}{test\PYZus{}analyze\PYZus{}alpha}\PY{p}{(}\PY{n}{analyze\PYZus{}alpha}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tests Passed
+
+    \end{Verbatim}
+
+    \subsubsection{View Data}\label{view-data}
+
+Let's see what values we get with our portfolio. After you run this,
+make sure to answer the question below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PY{n}{t\PYZus{}value}\PY{p}{,} \PY{n}{p\PYZus{}value} \PY{o}{=} \PY{n}{analyze\PYZus{}alpha}\PY{p}{(}\PY{n}{expected\PYZus{}portfolio\PYZus{}returns\PYZus{}by\PYZus{}date}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+s2}{Alpha analysis:}
+          \PY{l+s+s2}{ t\PYZhy{}value:        }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}
+          \PY{l+s+s2}{ p\PYZhy{}value:        }\PY{l+s+si}{\PYZob{}:.6f\PYZcb{}}
+          \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{t\PYZus{}value}\PY{p}{,} \PY{n}{p\PYZus{}value}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Alpha analysis:
+ t-value:        1.500
+ p-value:        0.070160
+
+
+    \end{Verbatim}
+
+    \subsubsection{Question: What p-value did you observe? And what does
+that indicate about your
+signal?}\label{question-what-p-value-did-you-observe-and-what-does-that-indicate-about-your-signal}
+
+    \emph{\#TODO: Put Answer In this Cell} The p-value I observed is:
+0.070160
+
+What this indicate is that we do not reject the null hypothesis because
+p-value is not less than the alpha, which is set at value 0.05.
+
+    \subsection{Submission}\label{submission}
+
+Now that you're done with the project, it's time to submit it. Click the
+submit button in the bottom right. One of our reviewers will give you
+feedback on your project with a pass or not passed grade. You can
+continue to the next section while you wait for feedback.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
